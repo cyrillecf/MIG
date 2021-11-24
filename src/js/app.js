@@ -11,7 +11,7 @@
  *    - instruments de départ;
  *    - optionnel -> theme : triste, joyeux, mélancolique, épique, drôle, peur, ...;
  */
-
+console.log("save-items feature");
 const KEYS    = ["A","B","C","D","E","F","G"];
 const ALTKEYS = ["","\u266d","\u266f"]; // bémol et dièse
 const SIMPLE_MODE = ["Major", "Minor"];
@@ -39,8 +39,9 @@ const INSTRUMENTS =
   "Brass", 
   "Keyboard" 
 ];
-
+let clickCounter = 0;
 let Mig = {
+  id    : 0,
   key   : "",
   alt   : "",
   mode  : "",
@@ -50,7 +51,8 @@ let Mig = {
   easyMode: false
 }
 
-function construct_Mig (key,alt,mode,tempo,instrument,accident,easyMode){
+function construct_Mig (id,key,alt,mode,tempo,instrument,accident,easyMode){
+  Mig.id    = id;
   Mig.key   = key;
   Mig.alt   = alt;
   Mig.mode  = mode;
@@ -81,7 +83,6 @@ function getRandomInt(min, max){// min et max inclue
 //#########################################################################################################
 
 function checkMig () {
-  
   if(!Mig.disableAccident){
     let key = Mig.key + Mig.alt;
 
@@ -132,7 +133,6 @@ function MigDisplay(){
   let tempo         = Mig.tempo;
   let instrument    = Mig.start_instrument;
   
-  
   let eltKey        = document.getElementById("key");
   let eltMode       = document.getElementById("mode");
   let eltTempo      = document.getElementById("tempo");
@@ -144,16 +144,37 @@ function MigDisplay(){
   eltInstrument.innerText = instrument;
 }
 
+function addSaveButton(id) {
+  let newSaveButton = document.createElement("button");
+  let textContent   = document.createTextNode("SAVE");
+
+  newSaveButton.className = 'btn-save-item';
+  newSaveButton.setAttribute("id", "save"+id)
+  newSaveButton.appendChild(textContent);
+  
+  let eltTarget = document.getElementById("item-content");
+  eltTarget.append(newSaveButton);
+}
+
+
 
 let doIt = true;
 function roll (){
   let count = 0;
-  
+  if(clickCounter > 0){ 
+    let eltbutton = document.getElementById("save"+(Mig.id-1));
+    eltbutton.remove();
+  }
     intervalId = setInterval(function(){
       if(count < 7){
         elt.click();
         count++;
-      }else{clearInterval(intervalId); doIt=true}
+      }else{
+        clearInterval(intervalId); 
+        doIt = true; 
+        clickCounter++;
+        addSaveButton(Mig.id); 
+      }
     },150);   
 }
 
@@ -182,7 +203,7 @@ elt.addEventListener('click', function(e){
   let instrument;
   let accident;
   let easyMode;
-
+  let id = clickCounter;
   key = getKey();
 
   if(accidentValue){
@@ -204,7 +225,7 @@ elt.addEventListener('click', function(e){
   tempo = getTempo();
   instrument = getIstrument();
 
-  construct_Mig(key,alt,mode,tempo,instrument,accident,easyMode);
+  construct_Mig(id,key,alt,mode,tempo,instrument,accident,easyMode);
   checkMig();
   MigDisplay();
   
@@ -215,6 +236,6 @@ elt.addEventListener('click', function(e){
 
 });
 
-console.log("save-items feature");
+
 
 
