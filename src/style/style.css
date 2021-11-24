@@ -1,0 +1,89 @@
+/** 
+* TODO: use GRID and FlexBox
+*/
+
+body{
+  font-size: 12px;
+  margin: 0;
+  background-color: rgba(240, 255, 255, 0.5);
+}
+main{
+  width: 500px;
+  margin: auto;
+  margin-top: 50px;
+  padding-bottom: 25px;/*CC BY*/
+  border: 2px solid black;
+  background-color: rgba(255, 235, 205, 0.70);
+}
+h1{
+  text-align: center;
+  font-size: 5em;
+}
+
+label{
+  font-size: 1.5em;
+}
+#introduce{
+  background-color: rgb(255, 255, 255);
+  border: 5px solid black;
+  width: 440px;
+  margin:auto;
+  padding: 0px 7px 0px 7px;
+  font-size: 1.3em;
+}
+
+#form{
+  text-align: center;
+}
+#run{
+  font-weight: bold;
+  font-size: x-large;
+  width: 150px;
+  height: 50px;
+  
+}
+ #display{
+  width: 440px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.parent-item-label{
+  display: inline-block;
+}
+.item-label{
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 105px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: rgb(252, 252, 252);
+} 
+
+.parent-item{
+  display: inline-block;
+}
+ .item{ /*#item-content pour contenu dans un seul block*/
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  text-transform: capitalize;
+  border: 1px solid black;
+  width: 105px;
+  height: 105px;
+  margin: 5px 5px 5px 5px;
+  font-size: 1.8em;
+}
+
+#key{background-color       : rgba(253, 94, 21, 0.87); font-size: 3em;}
+#mode{background-color      : rgba(255, 166, 0, 0.87); }
+#tempo{background-color     : rgba(0, 153, 255, 0.87); }
+#instrument{background-color: rgba(7, 148, 61, 0.87);}
+
+/* #licence-content{
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+} */
+  

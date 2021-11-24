@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/style/style.css">
+  <title>MIG</title>
+</head>
+
+<body>
+  <main>
+
+    <h1>MIG</h1>
+    <!-- <article id="introduce">
+      Vous êtes musicien, créateur de contenu musical en panne d'inspiration ?
+      Cette application pourrait, vous aidez.
+      Le concept est simple : cliquer sur le bouton "RUN" et vous obtiendrez des contraintes de création.
+      Utilisez les options de modes et d'altérations selon votre envie.
+    </article> -->
+
+    <form action="" id="form">
+      <p>
+        <input type="checkbox" name="alt" id="alt"> <label for="alt"><strong>Disable &#x266F; / &#x266D;</strong></label>
+      </p>
+      <p>
+        <input type="radio" name="mode" value="simple" id="simple_mode" checked><label for="simple_mode">Major / Minor
+          only</label>
+        <input type="radio" name="mode" value="all" id="all_mode"><label for="all_mode">All Modes</label>
+      </p>
+      <input type="submit" value="RUN" id="run">
+    </form>
+
+    <div id="display">
+      <div id="label-content">
+        <div class="parent-item-label"><div class="item-label">KEY</div></div>
+        <div class="parent-item-label"><div class="item-label">MODE </div></div>
+        <div class="parent-item-label"><div class="item-label">TEMPO</div></div>
+        <div class="parent-item-label"><div class="item-label">INSTRUMENT</div></div>
+      </div>
+
+      <div id="item-content">
+        <div class="parent-item"><div class="item" id="key">C</div></div>
+        <div class="parent-item"><div class="item" id="mode">Major</div></div>
+        <div class="parent-item"><div class="item" id="tempo">100 - 110</div></div>
+        <div class="parent-item"><div class="item" id="instrument">BASS</div></div>
+      </div>
+    </div>
+    
+    <!-- <div id="licence-content">
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">MIG</span> est mis à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">licence Creative Commons Attribution - Pas d’Utilisation Commerciale 4.0 International</a>.
+    </div> -->
+    
+  </main>
+  <script src="src/js/app.js"></script>
+</body>
+
+</html>
