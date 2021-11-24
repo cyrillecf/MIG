@@ -1,1 +1,3 @@
 # MIG
+
+Music Inspiration Generator
