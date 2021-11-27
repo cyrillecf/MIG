@@ -3,7 +3,7 @@
  * date de création : 23/11/2021
  * cyrille fourcin
  * description :
- *  Spirit permet de ramdomiser des contraintes pour aider à la création musicale.
+ *  Permet de créer des contraintes aléatoires pour aider à la création musicale.
  * 
  *    - tonalité;
  *    - mode: majeur, mineur, dorien, ... ;    
@@ -214,6 +214,3 @@ elt.addEventListener('click', function(e){
   }
 
 });
-
-
-
