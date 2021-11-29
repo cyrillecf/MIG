@@ -1,6 +1,12 @@
 /** 
 * TODO: use GRID and FlexBox
 */
+:root{
+  --orange: rgba(253, 94, 21, 0.87);
+  --yellow: rgba(255, 166, 0, 0.87);
+  --blue  : rgba(0, 153, 255, 0.87);
+  --green : rgba(7, 148, 61, 0.87);
+}
 
 body{
   font-size: 12px;
@@ -68,7 +74,7 @@ label{
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   border: 1px solid black;
   width: 105px;
   height: 105px;
@@ -76,14 +82,27 @@ label{
   font-size: 1.8em;
 }
 
-#key{background-color       : rgba(253, 94, 21, 0.87); font-size: 3em;}
-#mode{background-color      : rgba(255, 166, 0, 0.87); }
-#tempo{background-color     : rgba(0, 153, 255, 0.87); }
-#instrument{background-color: rgba(7, 148, 61, 0.87);}
+#key{ font-size: 3em;}
+.key{background-color       : var(--orange);}
+.mode{background-color      : var(--yellow);}
+.tempo{background-color     : var(--blue); }
+.instrument{background-color: var(--green);}
 
-/* #licence-content{
+/* save-items style */
+
+.save-content{
+  width: 440px;
+  margin: auto;
+  margin-top: 10px;
   text-align: center;
-  margin-top: 25px;
-  margin-bottom: 10px;
-} */
+  /* border: 1px solid black; */
+  /* background-color: var(--blue); */
+}
+.save-item{
+  display: inline-block;
+  border: 1px solid black;
+  font-size: 1.8em;
+  width:105px;
+}
+
   

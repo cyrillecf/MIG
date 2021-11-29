@@ -12,10 +12,11 @@
  *    - optionnel -> theme : triste, joyeux, mélancolique, épique, drôle, peur, ...;
  */
 console.log("save-items feature");
-const KEYS    = ["A","B","C","D","E","F","G"];
-const ALTKEYS = ["","\u266d","\u266f"]; // bémol et dièse
+
+const KEYS        = ["A","B","C","D","E","F","G"];
+const ALTKEYS     = ["","\u266d","\u266f"]; // Unicode bémol et dièse 
 const SIMPLE_MODE = ["Major", "Minor"];
-const MODE    = 
+const MODE = 
 [ 
   "Ionian", 
   "Dorian", 
@@ -46,7 +47,7 @@ let Mig = {
   alt   : "",
   mode  : "",
   tempo : 60,
-  start_instrument : "",
+  instrument : "",
   disableAccident: false,
   easyMode: false
 }
@@ -57,7 +58,7 @@ function construct_Mig (id,key,alt,mode,tempo,instrument,accident,easyMode){
   Mig.alt   = alt;
   Mig.mode  = mode;
   Mig.tempo = tempo;
-  Mig.start_instrument = instrument;
+  Mig.instrument = instrument;
   Mig.disableAccident = accident;
   Mig.easyMode = easyMode;
 }
@@ -82,7 +83,7 @@ function getRandomInt(min, max){// min et max inclue
 }
 //#########################################################################################################
 
-function checkMig () {
+function checkMig () { // verif des modes et des alterations non desirées; ex: "C♭"
   if(!Mig.disableAccident){
     let key = Mig.key + Mig.alt;
 
@@ -131,7 +132,7 @@ function MigDisplay(){
   let key           = Mig.key + Mig.alt;
   let mode          = Mig.mode;
   let tempo         = Mig.tempo;
-  let instrument    = Mig.start_instrument;
+  let instrument    = Mig.instrument;
   
   let eltKey        = document.getElementById("key");
   let eltMode       = document.getElementById("mode");
@@ -147,19 +148,79 @@ function MigDisplay(){
 function addSaveButton(id) {
   let newSaveButton = document.createElement("button");
   let textContent   = document.createTextNode("SAVE");
-
+  id = "save" +id;
   newSaveButton.className = 'btn-save-item';
-  newSaveButton.setAttribute("id", "save"+id)
+  newSaveButton.setAttribute("id", id)
   newSaveButton.appendChild(textContent);
   
   let eltTarget = document.getElementById("item-content");
   eltTarget.append(newSaveButton);
+
+  newSaveButton.onclick = createSaveContent;
+}
+function createSaveContent() {
+  // console.log(Mig.id);
+  let btnSaveElt = document.getElementById("save"+Mig.id);
+  btnSaveElt.disabled = true; // 🙄
+
+  let mainElt = document.getElementById("main-content");
+  
+  let saveContent = document.createElement("div");
+  saveContent.className = "save-content";
+  saveContent.setAttribute("id", "save-content-"+Mig.id);
+  mainElt.appendChild(saveContent);
+
+  let saveItemElt;
+  function createItemElt(){
+    for(let key in Mig){
+      let value = Mig[key];
+      
+      switch(key){ 
+        case 'key':
+          addElement(key, value);
+          if(Mig.alt !== ""){
+            manageSizeOfFlatKey(); // gestion de la fontSize du "♭" qui modifiait la taille du block (décalage vers le haut)
+          }
+          break;
+        case 'mode':
+          addElement(key, value);
+          break;
+        case 'tempo':
+          addElement(key, value);
+          break;
+        case 'instrument':
+          addElement(key, value);
+          break;
+        default :
+          break;
+      } 
+    }
+
+    function addElement(key,value){
+      saveItemElt = document.createElement("span");
+      saveItemElt.className = "save-item "+key;
+      saveItemElt.innerText = value;
+      saveContent.appendChild(saveItemElt);
+      return saveItemElt
+    }
+
+    function manageSizeOfFlatKey(){ //🙄
+      let flatkeyElt = document.createElement("span");
+      flatkeyElt.style.fontSize = '0.8em';
+      flatkeyElt.innerText = Mig.alt;
+      saveItemElt.appendChild(flatkeyElt);
+    }
+  }
+  createItemElt();
+
+  let RemoveButtonElt = document.createElement("button");// TODO
 }
 
-
+/* OPTIONS SELECTED and RUN onClick */ 
+const eltRun = document.getElementById('run');
 
 let doIt = true;
-function roll (){
+function roll (){ // trick semi-animation
   let count = 0;
   if(clickCounter > 0){ 
     let eltbutton = document.getElementById("save"+(Mig.id-1));
@@ -167,20 +228,18 @@ function roll (){
   }
     intervalId = setInterval(function(){
       if(count < 7){
-        elt.click();
+        eltRun.click();
         count++;
       }else{
         clearInterval(intervalId); 
         doIt = true; 
         clickCounter++;
-        addSaveButton(Mig.id); 
+        addSaveButton(Mig.id);
       }
     },150);   
 }
-
-// OPTIONS SELECTED and RUN onClick// 
-const elt = document.getElementById('run');
-elt.addEventListener('click', function(e){
+/* RUN BUTTON EVENT */
+eltRun.addEventListener('click', function(e){
   e.preventDefault();
   
   const form = document.getElementById("form");
@@ -204,25 +263,26 @@ elt.addEventListener('click', function(e){
   let accident;
   let easyMode;
   let id = clickCounter;
+
   key = getKey();
 
   if(accidentValue){
-    alt = "";
+    alt      = "";
     accident = true;
   }else{
-    alt = getAlt();
+    alt      = getAlt();
     accident = false;
   }
 
   if(modeValue != "all"){
-    mode = getSimpleMode();
+    mode     = getSimpleMode();
     easyMode = true;
   }else{
-    mode = getMode();
-    easyMode =  false;
+    mode     = getMode();
+    easyMode = false;
   }
   
-  tempo = getTempo();
+  tempo      = getTempo();
   instrument = getIstrument();
 
   construct_Mig(id,key,alt,mode,tempo,instrument,accident,easyMode);
@@ -233,5 +293,4 @@ elt.addEventListener('click', function(e){
     roll();
     doIt = false;
   }
-
 });
