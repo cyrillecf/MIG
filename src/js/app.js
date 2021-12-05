@@ -16,7 +16,7 @@ console.log("save-items feature");
 const KEYS        = ["A","B","C","D","E","F","G"];
 const ALTKEYS     = ["","\u266d","\u266f"]; // Unicode bémol et dièse 
 const SIMPLE_MODE = ["Major", "Minor"];
-const MODE = 
+const MODE        = 
 [ 
   "Ionian", 
   "Dorian", 
@@ -179,7 +179,7 @@ function createSaveContent() {
         case 'key':
           addElement(key, value);
           if(Mig.alt !== ""){
-            manageSizeOfFlatKey(); // gestion de la fontSize du "♭" qui modifiait la taille du block (décalage vers le haut)
+            manageSizeOfFlatKey(); // gestion de fontSize du "♭" qui modifiait la taille du block (décalage vers le haut)
           }
           break;
         case 'mode':
@@ -213,7 +213,11 @@ function createSaveContent() {
   }
   createItemElt();
 
-  let RemoveButtonElt = document.createElement("button");// TODO
+  
+}
+
+function deleteButton(){
+  let DeleteButtonElt = document.createElement("button");// TODO
 }
 
 /* OPTIONS SELECTED and RUN onClick */ 
